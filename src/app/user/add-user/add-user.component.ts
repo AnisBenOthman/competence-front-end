@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { User } from '../user.model';
 import { FormControl,  FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/core/services/user.service';
@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AddUserComponent {
   id!:number;
-  pays:string[]=[];
+  paysList:string[]=[];
   nomUser!:string;
   @Input() user!:User;
   userForm : FormGroup = new  FormGroup({
@@ -27,15 +27,24 @@ export class AddUserComponent {
   constructor(private sr:UserService, private ar:ActivatedRoute){
    this.id = this.ar.snapshot.params['id']
    this.sr.getPays().subscribe({
-    next: (data) => {
-      
-      data.countries.map((obj : any) => {
-         this.pays.push(obj!.name);
+    next:(data)=> {
+      data.map((obj : any) =>{
+        this.paysList.push(obj.name.common)
       })
+      this.paysList.sort();
+    },
+    error:(e)=> alert(e.message)})
+    //   next: (data) =>
+  //  this.sr.getPays().subscribe({
+  //   next: (data) => {
       
-    }, 
-    error: (err) => alert(err.message)
-  })
+  //     data.countries.map((obj : any) => {
+  //        this.paysList.push(obj!.name);
+  //     })
+      
+  //   }, 
+  //   error: (err) => alert(err.message)
+  // })
    if  (this.id != undefined) {
     this.sr.getUserById(this.id).subscribe({
       next : (data) => {
@@ -45,6 +54,8 @@ export class AddUserComponent {
           pays : data.pays
         });
         this.nomUser = data.nom;
+        console.log(this.userForm.value);
+        
       },
     error: (err) => alert(err.message) })
   

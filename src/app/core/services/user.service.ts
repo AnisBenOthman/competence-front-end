@@ -7,7 +7,7 @@ import { User } from 'src/app/user/user.model';
 })
 export class UserService {
   apiUrl: string =  "http://127.0.0.1:9090/employe/";
-  apiPays : string = "https://api.thecompaniesapi.com/v1/locations/countries?size=20"
+  apiPays : string = "https://restcountries.com/v3.1/all"
   constructor(private http:HttpClient) { }
   getUsers(){
     return  this.http.get<User[]>(this.apiUrl);
@@ -21,8 +21,10 @@ addUser(user:User){
 }
 
 getPays(){
+  
   return this.http.get<any>(this.apiPays);
 }
+  
 updateUser(id: number , user: User ){
   return this.http.put(this.apiUrl + id, user );
 }
