@@ -1,0 +1,18 @@
+
+<div class="container">
+    
+    <table class="table table-dark table-striped" *ngIf="affectations !== undefined">
+        <thead>
+        <tr>
+            <th>Intitulé</th>
+            <th>Evaluation</th>
+        </tr>
+    </thead>
+        <tbody>
+            <tr *ngFor="let affect of affectations">
+                <td>{{affect.competence}}</td>
+                <td>{{affect.niveau}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-xs-12" >
+      <div *ngIf="id == undefined"><p >Add new Competence!</p></div>
+
+      <div *ngIf="id"><h3 class="libelle"> {{competence.libelle}} details</h3></div>
+      
+    
+      <form>
+      <label>Libelle</label>
+      <div *ngIf="id == undefined"><input
+        type="text"
+        class="form-control"></div>
+      
+        <div *ngIf="id">
+          <input
+          type="text"
+          class="form-control" name="libelle" [(ngModel)]="competence.libelle">
+        </div>
+        <br>
+        <button class="btn btn-primary" *ngIf="id == undefined">Add Competence</button>
+        <button class="btn btn-primary" *ngIf="id">Modify Competence</button>
+        </form>
+        </div>

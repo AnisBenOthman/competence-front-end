@@ -1,0 +1,46 @@
+<!-- <h3 class="h3" *ngIf="user">{{user.nom}} details</h3>
+<div *ngIf="!user">User not found</div>
+<div class="row" >
+    <div class="col-xs-12">
+      <form [formGroup]="userForm" class="row g-3" >
+        <div class="col-md-4">
+            <label>Nom</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="nom"
+        [(ngModel)]="user.nom">
+        <div *ngIf="userForm.get('nom')!.invalid && (userForm.get('nom')!.touched || userForm.get('nom')!.dirty)">
+          <div class="alerte" *ngIf="userForm.get('nom')!.errors!['required']">Nom est obligatoire!</div>
+          <div  class="alerte" *ngIf="userForm.get('nom')!.errors!['minlength']">Le nom doit contenir au moins 3 caractères!</div>
+        </div> </div>
+      <div class="col-md-4">
+        <label>prenom</label>
+      
+      <input
+        type="text"
+        class="form-control"
+        formControlName="prenom"
+        [(ngModel)]="user.prenom">
+        <div *ngIf="userForm.get('prenom')!.invalid && (userForm.get('prenom')!.touched || userForm.get('prenom')!.dirty)">
+          <div class="alerte" *ngIf="userForm.get('prenom')!.errors!['required']">Prénom est obligatoire!</div>
+          <div class="alerte" *ngIf="userForm.get('prenom')!.errors!['minlength']">Le prénom doit contenir au moins 3 caractères!</div>
+        </div>
+      </div>
+      
+        <div class="col-md-3">
+            <label for="validationCustom04" class="form-label">pays</label>
+            <select class="form-select" id="validationCustom04" required #select [(ngModel)]="user.pays">
+              <option selected disabled [value]="" >{{user.pays}}</option>
+              <option>France</option>
+              <option>Tunisie</option>
+              <option>Spain</option>
+              <option>Chine</option>
+            </select>
+            </div>
+      </form>
+    </div>
+  </div> -->
+  <app-add-user [user]="user"></app-add-user>
+  <hr>
+  <app-list-affectation  [affectations]="affectations"></app-list-affectation>

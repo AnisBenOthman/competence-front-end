@@ -1,0 +1,21 @@
+<app-add-user (userAdded)="onUserAdd($event)"></app-add-user>
+<p *ngIf="!users">0 User</p>
+<table class="table table-striped" *ngIf="users.length>0">
+    <thead>
+    <tr>
+        <th>nom</th>
+        <th>prenom</th>
+        <th>pays</th>
+    </tr>
+</thead>
+<tbody>
+    <tr *ngFor="let user of users">
+        <td>{{user.nom}}</td>
+        <td>{{user.prenom}}</td>
+        <td>{{user.pays}}</td>
+        <td><a [routerLink]="['/user/',user.id]">Details</a></td>
+        <td><button>Delete</button></td>
+        
+    </tr>
+</tbody>
+</table>

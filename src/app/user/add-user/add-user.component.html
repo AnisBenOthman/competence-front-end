@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-xs-12">
+       <p *ngIf="id == undefined">Add new user!</p>
+      <!-- <h3 class="h3" *ngIf="id">{{user.nom}} details</h3> -->
+      <form [formGroup]="userForm">
+      <label>Nom</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="nom"
+        #inputNom>
+        <div *ngIf="userForm.get('nom')!.invalid && (userForm.get('nom')!.touched || userForm.get('nom')!.dirty)">
+          <div class="alerte" *ngIf="userForm.get('nom')!.errors!['required']">Nom est obligatoire!</div>
+          <div  class="alerte" *ngIf="userForm.get('nom')!.errors!['minlength']">Le nom doit contenir au moins 3 caractères!</div>
+        </div>
+      <label>prenom</label>
+      
+      <input
+        type="text"
+        class="form-control"
+        formControlName="prenom"
+        #inputPrenom>
+        <div *ngIf="userForm.get('prenom')!.invalid && (userForm.get('prenom')!.touched || userForm.get('prenom')!.dirty)">
+          <div class="alerte" *ngIf="userForm.get('prenom')!.errors!['required']">Prénom est obligatoire!</div>
+          <div class="alerte" *ngIf="userForm.get('prenom')!.errors!['minlength']">Le prénom doit contenir au moins 3 caractères!</div>
+        </div>
+        <div class="col-md-3">
+            <label for="validationCustom04" class="form-label">pays</label>
+            <select class="form-select" id="validationCustom04" required #select formControlName="pays">
+              <option  selected  value="" disabled >Choose...</option>
+              <option>France</option>
+              <option>Tunisie</option>
+              <option>Spain</option>
+              <option>Chine</option>
+            </select>
+            </div>
+      
+      <br>
+      <button
+        class="btn btn-primary"
+        [disabled]="userForm.invalid"
+        (click)="addUser()"
+        >{{getMessage()}}</button>
+        
+      </form>
+      
+      
+    </div>
+  </div>
+  
