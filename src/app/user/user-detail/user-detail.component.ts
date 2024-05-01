@@ -22,10 +22,7 @@ export class UserDetailComponent {
   
   getUserById(){
     this.dataService.getUserById(this.ar.snapshot.params['id']).subscribe({
-      next : (data) => {
-        this.user = data,
-        console.log(this.user);
-      },
+      next : (data) => this.user = data,
       error : (err) => alert(err.message),
     }) 
   }
@@ -35,5 +32,13 @@ export class UserDetailComponent {
       error: (e) => alert(e.message)
     })
   } 
+  updateUser(body:User){
+    this.dataService.updateUser(this.ar.snapshot.params["id"], body).subscribe({
+      next : (data) => {alert({
+        msg : "update successfuly",
+      });
+      console.log('update succes')},
+      error : (err)=>alert(err.message)
+    })}
 
 }

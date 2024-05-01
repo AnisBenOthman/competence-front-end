@@ -1,6 +1,9 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import {User} from  '../user.model';
 import { UserService } from 'src/app/core/services/user.service';
+import { ActivatedRoute } from '@angular/router';
+
+
 
 
 @Component({
@@ -10,8 +13,9 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class ListUsersComponent implements OnInit  {
   users !: User[] 
-  constructor(private lu:UserService){
-    
+  id!:number
+  constructor(private lu:UserService, private ar:ActivatedRoute){
+    this.id = this.ar.snapshot.params['id']
   }
   refraicher(){
     this.lu.getUsers().subscribe({
@@ -27,15 +31,16 @@ export class ListUsersComponent implements OnInit  {
   }
   
   onUserAdd(user:User){
+    
     this.lu.addUser(user).subscribe({
-      next: () => console.log(`Utilisateur ajouté`),
+      next: () => alert({msg:`Utilisateur ajouté`}),
       error: err=> alert(err.message)
     })
+    
     setTimeout(() => this.refraicher(),3000);
     
-  }
-}
-
   
-
+  
+}
+}
 

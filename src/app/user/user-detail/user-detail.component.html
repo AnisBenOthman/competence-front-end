@@ -41,6 +41,6 @@
       </form>
     </div>
   </div> -->
-  <app-add-user [user]="user"></app-add-user>
+  <app-add-user [user]="user" (userAdded)="updateUser($event)"></app-add-user>
   <hr>
   <app-list-affectation  [affectations]="affectations"></app-list-affectation>
