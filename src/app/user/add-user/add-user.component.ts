@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { User } from '../user.model';
 import { FormControl,  FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/core/services/user.service';
@@ -34,17 +34,7 @@ export class AddUserComponent {
       this.paysList.sort();
     },
     error:(e)=> alert(e.message)})
-    //   next: (data) =>
-  //  this.sr.getPays().subscribe({
-  //   next: (data) => {
-      
-  //     data.countries.map((obj : any) => {
-  //        this.paysList.push(obj!.name);
-  //     })
-      
-  //   }, 
-  //   error: (err) => alert(err.message)
-  // })
+    
    if  (this.id != undefined) {
     this.sr.getUserById(this.id).subscribe({
       next : (data) => {

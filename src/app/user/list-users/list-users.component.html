@@ -14,7 +14,7 @@
         <td>{{user.prenom}}</td>
         <td>{{user.pays}}</td>
         <td><a [routerLink]="['/user/',user.id]">Details</a></td>
-        <td><button>Delete</button></td>
+        <td><button (click)="delete(user.id)">Delete</button></td>
         
     </tr>
 </tbody>

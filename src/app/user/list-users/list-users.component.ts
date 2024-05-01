@@ -38,9 +38,14 @@ export class ListUsersComponent implements OnInit  {
     })
     
     setTimeout(() => this.refraicher(),3000);
-    
-  
-  
+   
+}
+delete(id: number){
+  this.lu.deleteUser(id).subscribe({
+    next:()=> {
+      alert('delete successfully')
+    this.users = this.users.filter(obj => obj.id != id )},
+    error:(err) => alert(err.message)
+})
 }
 }
-
