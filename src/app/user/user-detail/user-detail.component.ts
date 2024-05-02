@@ -41,4 +41,13 @@ export class UserDetailComponent {
       error : (err)=>alert(err.message)
     })}
 
+    addAffectation(data : any){
+      console.log(data);
+      this.affectationService.addAffectation(this.ar.snapshot.params["id"],data.competence.id,{niveau:data.niveau}).subscribe({
+        next: (data) => alert("add successfuly"),
+        error: (error) => alert(error.message)
+      })
+      setTimeout(() => this.getAffectationbyUser() ,2000);
+    }
+
 }

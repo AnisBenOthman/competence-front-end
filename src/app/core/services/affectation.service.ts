@@ -13,4 +13,7 @@ export class AffectationService {
   getAffectationByUser(id : number){
     return this.http.get<Affectation[]>(this.urlApi + "employe/" + id);
   }
+  addAffectation(idUser:number, idCompetence: number, nv:{niveau: number}){
+    return this.http.post(this.urlApi+idUser+'/'+idCompetence, nv);
+  }
 }

@@ -24,6 +24,7 @@ export class AddUserComponent {
   @ViewChild('inputNom', {static: true }) inputNom!: ElementRef;
   @ViewChild('inputPrenom', {static: true }) inputPrenom!: ElementRef;
   @ViewChild('select', {static: true }) select!: ElementRef;
+row: any;
   constructor(private sr:UserService, private ar:ActivatedRoute){
    this.id = this.ar.snapshot.params['id']
    this.sr.getPays().subscribe({

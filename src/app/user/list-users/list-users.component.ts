@@ -33,7 +33,7 @@ export class ListUsersComponent implements OnInit  {
   onUserAdd(user:User){
     
     this.lu.addUser(user).subscribe({
-      next: () => alert({msg:`Utilisateur ajouté`}),
+      next: () => alert(`Utilisateur ${user.nom}  ${user.prenom} ajouté successfully`),
       error: err=> alert(err.message)
     })
     

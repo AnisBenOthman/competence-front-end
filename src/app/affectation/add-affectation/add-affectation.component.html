@@ -1,1 +1,15 @@
-<p>add-affectation works!</p>
+<h4>Add Competence </h4>
+<form class="container" [formGroup]="affectionForm">
+    <div >
+        <label for="validationCustom04" class="form-label">Competence</label>
+        <select class="form-select" id="validationCustom04" required #select formControlName="competence" >
+          <option  selected  value="" disabled >Choose...</option>
+          <option *ngFor="let competence of competences" [ngValue]="competence">{{competence.libelle}}</option>
+        </select>
+        </div>
+        <div >
+            <label for="validationCustom04" class="form-label">Niveau</label>
+            <input type="number" class="form-control" max="3" min="1" value="1" required formControlName="niveau">
+            </div>
+            <button class="btn btn-primary" [disabled]="affectionForm.invalid" (click)="onSubmit()">Add</button>
+</form>
