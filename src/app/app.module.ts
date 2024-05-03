@@ -20,6 +20,7 @@ import { ListAffectationComponent } from './affectation/list-affectation/list-af
 import { UserService } from './core/services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CompetenceDetailComponent } from './competence/competence-detail/competence-detail.component';
+import { AlertComponent } from './shared/alert/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { CompetenceDetailComponent } from './competence/competence-detail/compet
     AddAffectationComponent,
     ListAffectationComponent,
     CompetenceDetailComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,

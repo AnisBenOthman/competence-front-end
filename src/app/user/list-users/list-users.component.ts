@@ -14,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ListUsersComponent implements OnInit  {
   users !: User[] 
   id!:number
+  del = false
   constructor(private lu:UserService, private ar:ActivatedRoute){
     this.id = this.ar.snapshot.params['id']
   }
@@ -41,11 +42,12 @@ export class ListUsersComponent implements OnInit  {
    
 }
 delete(id: number){
-  this.lu.deleteUser(id).subscribe({
-    next:()=> {
-      alert('delete successfully')
-    this.users = this.users.filter(obj => obj.id != id )},
-    error:(err) => alert(err.message)
-})
+  
+//   this.lu.deleteUser(id).subscribe({
+//     next:()=> {
+//       alert('delete successfully')
+//     this.users = this.users.filter(obj => obj.id != id )},
+//     error:(err) => alert(err.message)
+// })
 }
 }
