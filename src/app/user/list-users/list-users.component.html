@@ -1,5 +1,4 @@
 <app-add-user (userAdded)="onUserAdd($event)"></app-add-user>
-<app-alert *ngIf="del"></app-alert>
 <hr>
 <p *ngIf="!users">0 User</p>
 <table class="table table-striped" *ngIf="users.length>0">
@@ -16,9 +15,9 @@
         <td>{{user.prenom}}</td>
         <td>{{user.pays}}</td>
         <td><a [routerLink]="['/user/',user.id]">Details</a></td>
-        <td><app-alert [message]="user.nom"></app-alert></td>
         
-        <!-- <td><button (click)="delete(user.id)">Delete</button></td> -->
+        
+        <td><button (click)="delete(user)">Delete</button></td>
         
         
     </tr>

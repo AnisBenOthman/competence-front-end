@@ -2,6 +2,8 @@ import { Component, DoCheck, OnInit } from '@angular/core';
 import {User} from  '../user.model';
 import { UserService } from 'src/app/core/services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from  '@angular/material/dialog'
+import { AlertComponent } from 'src/app/shared/alert/alert/alert.component';
 
 
 
@@ -14,8 +16,8 @@ import { ActivatedRoute } from '@angular/router';
 export class ListUsersComponent implements OnInit  {
   users !: User[] 
   id!:number
-  del = false
-  constructor(private lu:UserService, private ar:ActivatedRoute){
+  
+  constructor(private lu:UserService, private ar:ActivatedRoute, public dl : MatDialog){
     this.id = this.ar.snapshot.params['id']
   }
   refraicher(){
@@ -41,13 +43,15 @@ export class ListUsersComponent implements OnInit  {
     setTimeout(() => this.refraicher(),3000);
    
 }
-delete(id: number){
-  
-//   this.lu.deleteUser(id).subscribe({
-//     next:()=> {
-//       alert('delete successfully')
-//     this.users = this.users.filter(obj => obj.id != id )},
-//     error:(err) => alert(err.message)
-// })
+delete(user : User){
+  let dialogRef = this.dl.open(AlertComponent, { data:{name:user.nom}});
+  dialogRef.afterClosed().subscribe((result)=>{
+    if(result == "true"){
+      this.lu.deleteUser(user.id).subscribe({
+            next:()=> {
+              alert('delete successfully')
+            this.users = this.users.filter(obj => obj.id != user.id )},
+            error:(err) => alert(err.message)
+    })}})
 }
 }

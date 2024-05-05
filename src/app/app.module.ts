@@ -21,6 +21,10 @@ import { UserService } from './core/services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CompetenceDetailComponent } from './competence/competence-detail/competence-detail.component';
 import { AlertComponent } from './shared/alert/alert/alert.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MaterialModule } from './material/material.module';
+
 
 @NgModule({
   declarations: [
@@ -41,6 +45,7 @@ import { AlertComponent } from './shared/alert/alert/alert.component';
     CompetenceDetailComponent,
     AlertComponent,
   ],
+  entryComponents: [AlertComponent],
   imports: [
     BrowserModule,
     //pour activer le routing
@@ -49,7 +54,11 @@ import { AlertComponent } from './shared/alert/alert/alert.component';
     FormsModule,
     //pour activer [formGroup] et les validations de formulaire
     ReactiveFormsModule,
-    HttpClientModule
+    //pour activer le service des api via http
+    HttpClientModule,
+    BrowserAnimationsModule,
+    //module angular material
+    MaterialModule
   ],
   providers: [], //service
   bootstrap: [AppComponent]
