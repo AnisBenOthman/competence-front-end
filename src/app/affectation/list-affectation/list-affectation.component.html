@@ -1,17 +1,19 @@
 
 <div class="container">
-    
+   <div *ngIf="affectations == []"><p>0 affectations </p></div> 
     <table class="table table-dark table-striped" *ngIf="affectations !== undefined">
         <thead>
         <tr>
             <th>Intitulé</th>
             <th>Evaluation</th>
+            <th>Delete option</th>
         </tr>
     </thead>
         <tbody>
             <tr *ngFor="let affect of affectations">
                 <td>{{affect.competence}}</td>
                 <td>{{affect.niveau}}</td>
+                <td><button mat-icon-button (click)="delete(affect)"><mat-icon>delete </mat-icon></button></td>
             </tr>
         </tbody>
     </table>

@@ -17,7 +17,8 @@
         <td><a [routerLink]="['/user/',user.id]">Details</a></td>
         
         
-        <td><button (click)="delete(user)">Delete</button></td>
+        <td><button mat-icon-button (click)="delete(user)" ><mat-icon>delete </mat-icon></button></td>
+        
         
         
     </tr>

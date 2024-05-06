@@ -16,4 +16,7 @@ export class AffectationService {
   addAffectation(idUser:number, idCompetence: number, nv:{niveau: number}){
     return this.http.post(this.urlApi+idUser+'/'+idCompetence, nv);
   }
+  deleteAffectation(id: number){
+    return this.http.delete(this.urlApi + id);
+  }
 }
