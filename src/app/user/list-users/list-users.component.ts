@@ -16,6 +16,8 @@ import { AlertComponent } from 'src/app/shared/alert/alert/alert.component';
 export class ListUsersComponent implements OnInit  {
   users !: User[] 
   id!:number
+  alert = 0;
+  message:string = "";
   
   constructor(private lu:UserService, private ar:ActivatedRoute, public dl : MatDialog){
     this.id = this.ar.snapshot.params['id']
@@ -36,8 +38,14 @@ export class ListUsersComponent implements OnInit  {
   onUserAdd(user:User){
     
     this.lu.addUser(user).subscribe({
-      next: () => alert(`Utilisateur ${user.nom}  ${user.prenom} ajouté successfully`),
-      error: err=> alert(err.message)
+      next: () => {
+        this.message = `user ${user.nom} ${user.prenom} has been successfully added `;
+        this.alert = 1;
+      },
+      error: (err) => {
+        this.message = err.message,
+        this.alert = 2
+      }
     })
     
     setTimeout(() => this.refraicher(),3000);
@@ -49,9 +57,13 @@ delete(user : User){
     if(result == "true"){
       this.lu.deleteUser(user.id).subscribe({
             next:()=> {
-              alert('delete successfully')
+              this.alert = 1
+              this.message = `${user.nom} ${user.prenom} has been deleted successfully`
             this.users = this.users.filter(obj => obj.id != user.id )},
-            error:(err) => alert(err.message)
+            error:(err) => {
+              this.alert = 2;
+              this.message = err.message;
+            }
     })}})
 }
 }

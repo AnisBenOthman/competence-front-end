@@ -1,6 +1,6 @@
 
 <div class="container">
-   <div *ngIf="affectations == []"><p>0 affectations </p></div> 
+   <div *ngIf="affectations == undefined"><p >0 affectations </p></div> 
     <table class="table table-dark table-striped" *ngIf="affectations !== undefined">
         <thead>
         <tr>

@@ -41,7 +41,7 @@
       <br>
       <button
         class="btn btn-primary"
-        [disabled]="userForm.invalid && !userForm.touched"
+        [disabled]="userForm.invalid"
         (click)="addUser()"
         >{{getMessage()}}</button>
         
