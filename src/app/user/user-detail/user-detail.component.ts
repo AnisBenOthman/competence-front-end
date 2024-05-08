@@ -41,7 +41,7 @@ export class UserDetailComponent {
     this.dataService.updateUser(this.ar.snapshot.params["id"], body).subscribe({
       next : (data : any) => { 
         this.alert = 1;
-        this.message = data.Message},
+        this.message = body.nom + " " +  body.prenom + " " +data.Message;},
       error : (err)=> {
         this.alert = 2;
         this.message = err.message;

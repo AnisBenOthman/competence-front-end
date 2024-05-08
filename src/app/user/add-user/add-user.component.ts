@@ -25,6 +25,7 @@ export class AddUserComponent {
   @ViewChild('inputPrenom', {static: true }) inputPrenom!: ElementRef;
   @ViewChild('select', {static: true }) select!: ElementRef;
 row: any;
+
   constructor(private sr:UserService, private ar:ActivatedRoute){
    this.id = this.ar.snapshot.params['id']
    this.sr.getPays().subscribe({
@@ -68,7 +69,7 @@ addUser(){
     this.userForm.reset();
   }
   this.userAdded.emit(user);
-  
+  this.nomUser = user.nom;
 }
 
 }

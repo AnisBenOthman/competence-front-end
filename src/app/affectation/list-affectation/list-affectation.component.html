@@ -12,7 +12,11 @@
         <tbody>
             <tr *ngFor="let affect of affectations">
                 <td>{{affect.competence}}</td>
-                <td>{{affect.niveau}}</td>
+                <td><mat-radio-group aria-label="Select an option" required="true" value="{{affect.niveau}}">
+                <mat-radio-button value="1">1</mat-radio-button>
+                <mat-radio-button value="2">2</mat-radio-button> 
+                <mat-radio-button value="3">3</mat-radio-button>     
+                </mat-radio-group></td>
                 <td><button mat-icon-button (click)="delete(affect)"><mat-icon>delete </mat-icon></button></td>
             </tr>
         </tbody>
