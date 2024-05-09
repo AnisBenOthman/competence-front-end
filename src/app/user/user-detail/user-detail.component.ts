@@ -16,6 +16,7 @@ export class UserDetailComponent {
   affectations!:Affectation[];
   alert = 0;
   message = "";
+  arrayUpdate : Affectation[] = [];
   constructor(private dataService: UserService, private ar: ActivatedRoute, private affectationService: AffectationService) {
     this.getUserById();
     this.getAffectationbyUser();
@@ -41,12 +42,20 @@ export class UserDetailComponent {
     this.dataService.updateUser(this.ar.snapshot.params["id"], body).subscribe({
       next : (data : any) => { 
         this.alert = 1;
-        this.message = body.nom + " " +  body.prenom + " " +data.Message;},
+        this.message = body.nom + " " +  body.prenom + " " +data.Message;
+        this.updateAffectation(this.arrayUpdate)},
       error : (err)=> {
         this.alert = 2;
         this.message = err.message;
       }
-    })}
+    })
+    
+  }
+
+    getDataAffectation(data : any){
+      this.arrayUpdate = data
+      
+    }
 
     addAffectation(data : any){
     
@@ -73,5 +82,15 @@ export class UserDetailComponent {
     declare(data : any){
 this.message = data.message,
 this.alert = data.alert
+    }
+    updateAffectation(data : any){
+      if(data.length > 0){
+        for (let i=0; i < data.length; i++){
+          this.affectationService.updateAffectationEmploye(data[i].id,{ niveau : data[i].niveau}).subscribe({
+            next:(d) => console.log(d),
+            error:(erreur) => alert(erreur.message)
+          })
+        }
+      }
     }
 }

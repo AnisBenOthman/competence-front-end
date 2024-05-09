@@ -4,7 +4,7 @@
   <hr>
   <app-add-affectation (addCompetence)="addAffectation($event)"></app-add-affectation>
   <hr>
-  <app-list-affectation  [affectations]="affectations" (trig)="declare($event)"></app-list-affectation>
+  <app-list-affectation  [affectations]="affectations" (trig)="declare($event)" (updateEvent)="getDataAffectation($event)"></app-list-affectation>
   
   
   

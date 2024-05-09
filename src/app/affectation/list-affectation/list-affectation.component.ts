@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatRadioChange } from '@angular/material/radio';
 import { Affectation } from 'src/app/core/models/affectation.model';
 import { AffectationService } from 'src/app/core/services/affectation.service';
 import { AlertComponent } from 'src/app/shared/alert/alert/alert.component';
@@ -14,6 +15,8 @@ export class ListAffectationComponent {
 message = "";
 alert = 0;
 @Output() trig = new EventEmitter<{message : string, alert : number}>;
+@Output() updateEvent = new EventEmitter<Affectation[]>;
+finalArray : Affectation[] = [];
 constructor(private dialogue : MatDialog, private sr : AffectationService) {
   console.log(this.affectations == undefined)
  }
@@ -37,5 +40,17 @@ ref.afterClosed().subscribe({
     }
   }
 })
+}
+onRadioChange(event : MatRadioChange, data : Affectation){
+  data.niveau = event.value
+  console.log('option selectionnée:', event.value)
+    // if(!this.finalArray.some((x) => x.id == data.id )){
+    //   this.finalArray.push(data);
+    // }
+    if(!this.finalArray.includes(data)){
+      this.finalArray.push(data);
+    }
+  console.log(this.finalArray)
+  this.updateEvent.emit(this.finalArray)
 }
 }
