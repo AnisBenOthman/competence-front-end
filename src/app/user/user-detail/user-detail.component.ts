@@ -1,37 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../user.model';
 import { UserService } from 'src/app/core/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Affectation } from 'src/app/core/models/affectation.model';
 import { AffectationService } from 'src/app/core/services/affectation.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.css']
 })
-export class UserDetailComponent {
+export class UserDetailComponent implements OnInit {
   user!: User;
-  affectations!:Affectation[];
+  affectations:Affectation[] = [];
   alert = 0;
   message = "";
   arrayUpdate : Affectation[] = [];
   constructor(private dataService: UserService, private ar: ActivatedRoute, private affectationService: AffectationService) {
     this.getUserById();
     this.getAffectationbyUser();
+    
   
   }
+  ngOnInit(): void {
+    this.getUserById
+    
+  }
+  
+  
   
   getUserById(){
     this.dataService.getUserById(this.ar.snapshot.params['id']).subscribe({
-      next : (data) => this.user = data,
+      next : (data) => {
+        this.user = data;
+        this.getAffectationbyUser},
       error : (err) => alert(err.message),
     }) 
   }
   getAffectationbyUser(){
     this.affectationService.getAffectationByUser(this.ar.snapshot.params["id"]).subscribe({
-      next: (data) => this.affectations=data ,
+      next: (data) => {
+        this.affectations=data;
+        console.log(this.affectations)
+        },
       error: (e) => {
         this.alert = 2;
         this.message = e.message;

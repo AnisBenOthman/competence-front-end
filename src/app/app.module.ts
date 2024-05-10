@@ -24,6 +24,8 @@ import { AlertComponent } from './shared/alert/alert/alert.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MaterialModule } from './material/material.module';
+import { NgChartsModule } from 'ng2-charts';
+import { RadarComponent } from './radar/radar.component';
 
 
 @NgModule({
@@ -44,6 +46,7 @@ import { MaterialModule } from './material/material.module';
     ListAffectationComponent,
     CompetenceDetailComponent,
     AlertComponent,
+    RadarComponent,
   ],
   entryComponents: [AlertComponent],
   imports: [
@@ -58,7 +61,8 @@ import { MaterialModule } from './material/material.module';
     HttpClientModule,
     BrowserAnimationsModule,
     //module angular material
-    MaterialModule
+    MaterialModule,
+    NgChartsModule
   ],
   providers: [], //service
   bootstrap: [AppComponent]
