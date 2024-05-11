@@ -16,20 +16,11 @@ export class RadarComponent {
   affectations: any[] = [];
   competencesName : string[] = [] 
   niveau : number[] = []
+  id !: number
 constructor(private affectationService : AffectationService, private ar: ActivatedRoute, private dataService: UserService){
   this.getAffectationbyUser();
-  this.getUserById();
 }
-getUserById(){
-  this.dataService.getUserById(this.ar.snapshot.params['id']).subscribe({
-    next : (data) => {
-      this.o = data;
-      console.log(this.o)
-      
-    },
-    error : (err) => alert(err.message),
-  }) 
-}
+
 
   radarChartOptions: ChartConfiguration<'radar'>['options']= {
     responsive: true, scales : { r : { suggestedMin : 0, suggestedMax :3}}
@@ -37,22 +28,36 @@ getUserById(){
   radarChartLabels : string[] = [];
   radarChartDatasets : ChartConfiguration<'radar'>['data']['datasets'] = [{data : this.niveau, label: `Competence here`, borderWidth : 1} ]
   getAffectationbyUser(){
-    this.affectationService.getAffectationByUser(this.ar.snapshot.params["id"]).subscribe({
-      next: (data : any) => {
-        this.affectations=data;
-        data.map((o : any) => {
-          this.competencesName.push(o.competence)
-        this.niveau.push(o.niveau)})
-        console.log(this.competencesName)
-        this.radarChartLabels = this.competencesName;
-        
-        
-        
-        },
-      error: (e) => {
-        
-      }
-    })
+    this.id = this.ar.snapshot.params["id"];
+    if(this.id){
+      this.affectationService.getAffectationByUser(this.ar.snapshot.params["id"]).subscribe({
+        next: (data : any) => {
+          this.affectations=data;
+          data.map((o : any) => {
+            this.competencesName.push(o.competence)
+          this.niveau.push(o.niveau)})
+          console.log(this.competencesName)
+          this.radarChartLabels = this.competencesName;
+          
+          },
+        error: (e) => alert(e.message)
+      })
+    } else {
+      this.affectationService.getCompetenceTeam().subscribe({
+        next : (data) => {
+          console.log(data);
+          data.map((o : any) => {
+            this.competencesName.push(o.competence)
+          this.niveau.push(o.moyenne)})
+          console.log(this.competencesName)
+          console.log(this.niveau)
+          this.radarChartLabels = this.competencesName;
+          
+          },
+        error: (e) => alert(e.message)
+      })
+    }
+    
   } 
  
 }

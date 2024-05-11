@@ -7,6 +7,7 @@ import { HomeComponent } from './shared/home/home.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
 import { CompetenceDetailComponent } from './competence/competence-detail/competence-detail.component';
 import { RadarComponent } from './radar/radar.component';
+import { RadarTeamComponent } from './radar-team/radar-team.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -25,7 +26,7 @@ const routes: Routes = [
     ]
   },
   { path: 'home', component: HomeComponent },
-  {path : 'radar', component : RadarComponent},
+  {path : 'radar', component : RadarTeamComponent},
   { path: '**', component: NotFoundComponent }
 ];
 

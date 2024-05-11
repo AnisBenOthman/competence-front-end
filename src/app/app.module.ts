@@ -26,6 +26,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MaterialModule } from './material/material.module';
 import { NgChartsModule } from 'ng2-charts';
 import { RadarComponent } from './radar/radar.component';
+import { RadarTeamComponent } from './radar-team/radar-team.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { RadarComponent } from './radar/radar.component';
     CompetenceDetailComponent,
     AlertComponent,
     RadarComponent,
+    RadarTeamComponent,
   ],
   entryComponents: [AlertComponent],
   imports: [

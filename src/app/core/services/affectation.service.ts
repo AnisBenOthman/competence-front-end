@@ -8,10 +8,14 @@ import { Affectation } from '../models/affectation.model';
 })
 export class AffectationService {
   urlApi: string = "http://127.0.0.1:9090/competenceEmploye/";
+  urlTeam : string = "http://127.0.0.1:9090/competenceEmploye/getTeam";
 
   constructor(private http:HttpClient) { }
   getAffectationByUser(id : number){
     return this.http.get<Affectation[]>(this.urlApi + "employe/" + id);
+  }
+  getCompetenceTeam(){
+return this.http.get<any>(this.urlTeam);
   }
   addAffectation(idUser:number, idCompetence: number, nv:{niveau: number}){
     return this.http.post(this.urlApi+idUser+'/'+idCompetence, nv);
