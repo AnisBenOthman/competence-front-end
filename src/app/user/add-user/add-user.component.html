@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xs-12">
-       <p *ngIf="id == undefined">Add new user!</p>
+       <h4 *ngIf="id == undefined"><b>Add new user!</b></h4>
       <h3 class="h3" *ngIf="id">{{nomUser}} details</h3>
       <hr>
       <form [formGroup]="userForm" [ngClass]="{'row g-3' : id}">

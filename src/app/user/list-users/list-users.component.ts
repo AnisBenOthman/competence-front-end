@@ -4,6 +4,7 @@ import { UserService } from 'src/app/core/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from  '@angular/material/dialog'
 import { AlertComponent } from 'src/app/shared/alert/alert/alert.component';
+import { FormControl } from '@angular/forms';
 
 
 
@@ -18,6 +19,7 @@ export class ListUsersComponent implements OnInit  {
   id!:number
   alert = 0;
   message:string = "";
+  search = new FormControl("");
   
   constructor(private lu:UserService, private ar:ActivatedRoute, public dl : MatDialog){
     this.id = this.ar.snapshot.params['id']
@@ -65,5 +67,23 @@ delete(user : User){
               this.message = err.message;
             }
     })}})
+}
+searchUser(){
+  
+  let searchTerm : string = this.search.value ?? "";
+  if(searchTerm !== ""){
+    this.lu.searchUserByName(searchTerm).subscribe({
+      next:(data) => {
+        this.users = data;
+        if(data.length == 0){
+          this.message="No users found"
+        }
+      },
+      error:(err) => alert(err.message)
+    })
+  }
+  else{
+    this.refraicher();
+  }
 }
 }

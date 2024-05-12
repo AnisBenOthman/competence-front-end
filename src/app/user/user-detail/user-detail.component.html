@@ -3,9 +3,14 @@
   <app-add-user [user]="user" (userAdded)="updateUser($event)"></app-add-user>
   <hr>
   <app-add-affectation (addCompetence)="addAffectation($event)"></app-add-affectation>
-  <hr>
-  <app-list-affectation  [affectations]="affectations" (trig)="declare($event)" (updateEvent)="getDataAffectation($event)"></app-list-affectation>
-  <hr>
-  <app-radar></app-radar>
+  <div *ngIf="affectations.length != 0">
+    <hr>
+    <app-list-affectation  [affectations]="affectations" (trig)="declare($event)" (updateEvent)="getDataAffectation($event)" ></app-list-affectation>
+  </div>
+  <div *ngIf="affectations.length != 0">
+    <hr>
+    <app-radar ></app-radar>
+  </div>
+  
   
   

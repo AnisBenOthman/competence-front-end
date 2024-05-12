@@ -2,7 +2,10 @@
 <div class="alert alert-danger" role="alert" *ngIf="alert == 2">{{message}}</div>
 <app-add-user (userAdded)="onUserAdd($event)"></app-add-user>
 <hr>
-<p *ngIf="!users">0 User</p>
+<h4><b>{{users.length}} element(s)</b></h4>
+<p>{{search.value}}</p>
+<mat-form-field color="primary"><mat-label>  Search user</mat-label> <mat-icon matSuffix>search</mat-icon> <input matInput [formControl]="search" (keydown.enter)="searchUser()" (blur)="refraicher()"></mat-form-field>
+<h2 *ngIf="users.length == 0">{{message}}</h2>
 <table class="table table-striped" *ngIf="users.length>0">
     <thead>
     <tr>

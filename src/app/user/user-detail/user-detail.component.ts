@@ -21,6 +21,7 @@ export class UserDetailComponent implements OnInit {
   constructor(private dataService: UserService, private ar: ActivatedRoute, private affectationService: AffectationService) {
     this.getUserById();
     this.getAffectationbyUser();
+    console.log(this.addAffectation)
     
   
   }

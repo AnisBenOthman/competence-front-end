@@ -31,6 +31,9 @@ updateUser(id: number , user: User ){
 deleteUser(id: number) {
 return this.http.delete(this.apiUrl + id );
 }
+searchUserByName(name:string) {
+  return this.http.get<User[]>(this.apiUrl + "nom/"+ name);
+}
 
   
 }
