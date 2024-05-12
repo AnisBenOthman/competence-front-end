@@ -24,6 +24,12 @@ getPays(){
   
   return this.http.get<any>(this.apiPays);
 }
+filtrePays(){
+  return this.http.get<string[]>(this.apiUrl+'/pays/getpays');
+}
+getUserByPays(body :{ pays : string | null}){
+  return this.http.post<User[]>(this.apiUrl + 'pays/filtrepays/',body )
+}
   
 updateUser(id: number , user: User ){
   return this.http.put(this.apiUrl + id, user );

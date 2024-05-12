@@ -6,9 +6,10 @@ import {MatIconModule,} from '@angular/material/icon';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 
     
-    const materialComposant = [MatSlideToggleModule, MatDialogModule, MatButtonModule, MatIconModule, MatRadioModule, MatFormFieldModule, MatInputModule]
+    const materialComposant = [MatSlideToggleModule, MatDialogModule, MatButtonModule, MatIconModule, MatRadioModule, MatFormFieldModule, MatInputModule, MatSelectModule]
 @NgModule({
   declarations: [],
   imports: [

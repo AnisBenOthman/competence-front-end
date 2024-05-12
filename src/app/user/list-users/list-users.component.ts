@@ -20,9 +20,14 @@ export class ListUsersComponent implements OnInit  {
   alert = 0;
   message:string = "";
   search = new FormControl("");
+  paysSelectionne = new FormControl('');
+  paysFiltre: string [] = [];
+  
   
   constructor(private lu:UserService, private ar:ActivatedRoute, public dl : MatDialog){
     this.id = this.ar.snapshot.params['id']
+    this.getPays()
+    
   }
   refraicher(){
     this.lu.getUsers().subscribe({
@@ -85,5 +90,25 @@ searchUser(){
   else{
     this.refraicher();
   }
+}
+getPays(){
+  this.lu.filtrePays().subscribe({
+    next:(data) => {
+      this.paysFiltre = data;
+      console.log(this.paysFiltre)},
+    error: (e) => alert(e.message)
+  })
+}
+filtrePays(){
+  
+  this.lu.getUserByPays({pays: this.paysSelectionne.value}).subscribe({
+    next:(data)=> {
+      console.log(this.paysSelectionne.value)
+      console.log(data)
+      this.users=data
+      
+    },
+    error : (err) => alert(err.message) 
+  })
 }
 }
