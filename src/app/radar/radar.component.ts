@@ -17,6 +17,7 @@ export class RadarComponent {
   competencesName : string[] = [] 
   niveau : number[] = []
   id !: number
+  @Input() pays !: string | null;
 constructor(private affectationService : AffectationService, private ar: ActivatedRoute, private dataService: UserService){
   this.getAffectationbyUser();
 }
@@ -25,9 +26,10 @@ constructor(private affectationService : AffectationService, private ar: Activat
   radarChartOptions: ChartConfiguration<'radar'>['options']= {
     responsive: true, scales : { r : { suggestedMin : 0, suggestedMax :3}}
   }
-  radarChartLabels : string[] = [];
-  radarChartDatasets : ChartConfiguration<'radar'>['data']['datasets'] = [{data : this.niveau, label: `Competence here`, borderWidth : 1} ]
+  @Input() radarChartLabels : string[] = [];
+  @Input() radarChartDatasets : ChartConfiguration<'radar'>['data']['datasets'] = [{data : this.niveau, label: `Competence here`, borderWidth : 1} ]
   getAffectationbyUser(){
+    
     this.id = this.ar.snapshot.params["id"];
     if(this.id){
       this.affectationService.getAffectationByUser(this.ar.snapshot.params["id"]).subscribe({
@@ -36,21 +38,20 @@ constructor(private affectationService : AffectationService, private ar: Activat
           data.map((o : any) => {
             this.competencesName.push(o.competence)
           this.niveau.push(o.niveau)})
-          console.log(this.competencesName)
+          
           this.radarChartLabels = this.competencesName;
           
           },
         error: (e) => alert(e.message)
       })
-    } else {
+    } else if (this.id == undefined && this.pays == undefined) {
       this.affectationService.getCompetenceTeam().subscribe({
         next : (data) => {
-          console.log(data);
+          
           data.map((o : any) => {
             this.competencesName.push(o.competence)
           this.niveau.push(o.moyenne)})
-          console.log(this.competencesName)
-          console.log(this.niveau)
+          
           this.radarChartLabels = this.competencesName;
           
           },

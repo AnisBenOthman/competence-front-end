@@ -1,1 +1,17 @@
-<app-radar></app-radar>
+<div class="select-container">
+    <mat-form-field >
+        <mat-label>Pays</mat-label>
+        <mat-select  [formControl]="paysSelectionne" multiple (selectionChange)="filtrePays()">
+          <mat-select-trigger>
+            {{ paysSelectionne.value?.[0] || '' }}
+            <span *ngIf="(paysSelectionne.value?.length || 0) > 1" class="example-additional-selection">
+              (+{{ (paysSelectionne.value?.length || 0) - 1 }} {{ paysSelectionne.value?.length === 2 ? 'other' : 'others' }})
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let pay of paysFiltre" [value]="pay">{{ pay }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+</div>
+<hr>
+
+<app-radar [pays]="paysSelectionne.value" [radarChartDatasets]="dataSet"></app-radar>

@@ -16,4 +16,7 @@ export class CompetenceService {
   getCompetenceById(id:number){
     return this.http.get<Competence>(this.urlApi+'id/'+id);
   }
+  addCompetence(body: Competence){
+    return this.http.post(this.urlApi, body)
+  }
 }

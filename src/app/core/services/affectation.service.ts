@@ -26,4 +26,13 @@ return this.http.get<any>(this.urlTeam);
   deleteAffectation(id: number){
     return this.http.delete(this.urlApi + id);
   }
+  getAffectationPays(body : {pays : string | null} ){
+    return this.http.post<any[]>(this.urlApi + '/pays',body )
+  }
+  getCompetencePays(id: string){
+    return this.http.get<any[]>(this.urlApi + "competencespays/" + id );
+  }
+  getCompetences(){
+    return this.http.get<string[]>(this.urlApi + "competences")
+  }
 }
