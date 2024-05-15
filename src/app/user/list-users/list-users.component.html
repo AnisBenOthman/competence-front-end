@@ -7,6 +7,9 @@
 <div class="mat-form">
     <div class="search-container">
         <mat-form-field color="warn"><mat-label>  Search user</mat-label> <mat-icon matSuffix>search</mat-icon> <input matInput [formControl]="search" (keydown.enter)="searchUser()"></mat-form-field> 
+        <div *ngIf="search!.invalid && (search!.dirty)">
+          <div  class="alerte" *ngIf="search!.errors!['pattern']">Le mot recherché doit être en alphabet seulement</div>
+        </div>
     </div>
     
         

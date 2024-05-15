@@ -4,7 +4,7 @@ import { UserService } from 'src/app/core/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from  '@angular/material/dialog'
 import { AlertComponent } from 'src/app/shared/alert/alert/alert.component';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 
 
@@ -19,7 +19,7 @@ export class ListUsersComponent implements OnInit  {
   id!:number
   alert = 0;
   message:string = "";
-  search = new FormControl("");
+  search = new FormControl("",[Validators.pattern('^[a-zA-Z ]+$')]);
   paysSelectionne = new FormControl('');
   paysFiltre: string [] = [];
   

@@ -14,6 +14,7 @@
             <div *ngIf="userForm.get('nom')!.invalid && (userForm.get('nom')!.touched || userForm.get('nom')!.dirty)">
               <div class="alerte" *ngIf="userForm.get('nom')!.errors!['required']">Nom est obligatoire!</div>
               <div  class="alerte" *ngIf="userForm.get('nom')!.errors!['minlength']">Le nom doit contenir au moins 3 caractères!</div>
+              <div  class="alerte" *ngIf="userForm.get('nom')!.errors!['pattern']">Le nom doit être en alphabet seulement</div>
             </div>
         </div>
       <div [ngClass]="{'col-md-4' : id}">
@@ -27,6 +28,7 @@
         <div *ngIf="userForm.get('prenom')!.invalid && (userForm.get('prenom')!.touched || userForm.get('prenom')!.dirty)">
           <div class="alerte" *ngIf="userForm.get('prenom')!.errors!['required']">Prénom est obligatoire!</div>
           <div class="alerte" *ngIf="userForm.get('prenom')!.errors!['minlength']">Le prénom doit contenir au moins 3 caractères!</div>
+          <div  class="alerte" *ngIf="userForm.get('prenom')!.errors!['pattern']">Le prénom doit être en alphabet seulement</div>
         </div>
       </div>
       

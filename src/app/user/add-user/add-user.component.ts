@@ -15,8 +15,8 @@ export class AddUserComponent {
   nomUser!:string;
   @Input() user!:User;
   userForm : FormGroup = new  FormGroup({
-    nom : new FormControl("",[Validators.required,Validators.minLength(3)]),
-    prenom : new FormControl("", [Validators.required, Validators.minLength(3)]),
+    nom : new FormControl("",[Validators.required,Validators.minLength(3), Validators.pattern('^[a-zA-Z ]+$')]),
+    prenom : new FormControl("", [Validators.required, Validators.minLength(3), Validators.pattern('^[a-zA-Z ]+$')]),
     pays : new FormControl("",[Validators.required])
 
   });

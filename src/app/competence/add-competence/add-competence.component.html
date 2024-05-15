@@ -19,6 +19,7 @@
         <div *ngIf="libelle.invalid && (libelle.touched || libelle!.dirty)">
           <div class="alerte" *ngIf="libelle!.errors!['required']">Libelle est obligatoire!</div>
           <div  class="alerte" *ngIf="libelle.errors!['minlength']">Le libelle doit contenir au moins 3 caractères!</div>
+          <div  class="alerte" *ngIf="libelle!.errors!['pattern']">Le libelle doit être en alphabet seulement</div>
         </div>
         <br>
         <button class="btn btn-primary" *ngIf="id == undefined" [disabled]="libelle.invalid" (click)="addCompetence()">Add Competence</button>

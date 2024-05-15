@@ -12,7 +12,7 @@ import { FormControl, Validators } from '@angular/forms';
 export class AddCompetenceComponent {
 @Input() competence!:Competence;
 @Output() addLibelle = new EventEmitter<Competence>();
-libelle = new FormControl("",[Validators.required, Validators.minLength(3)]);
+libelle = new FormControl("",[Validators.required, Validators.minLength(3), Validators.pattern('^[a-zA-Z ]+$')]);
 id!: number
 constructor(private ar : ActivatedRoute, private cs : CompetenceService ) {
 this.id = ar.snapshot.params['id'];
