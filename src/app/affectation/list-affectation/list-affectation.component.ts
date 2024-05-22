@@ -16,7 +16,7 @@ export class ListAffectationComponent {
 @Input() propretyName!:string;
 message = "";
 alert = 0;
-@Output() trig = new EventEmitter<{message : string, alert : number}>;
+@Output() trig = new EventEmitter<{message : string, alert : number, affect : Affectation}>;
 @Output() updateEvent = new EventEmitter<Affectation[]>; //send data : list modified to user-detail component
 finalArray : Affectation[] = []; //list which include only affectation who has been changed level
 constructor(private dialogue : MatDialog, private sr : AffectationService) {
@@ -32,10 +32,10 @@ ref.afterClosed().subscribe({
       this.sr.deleteAffectation(affect.id).subscribe({
         next: (data : any) => {
           this.message = data.message;
-          this.trig.emit({message : affect.competence + " " + this.message, alert : 1})
+          this.trig.emit({message : affect.competence + " " + this.message, alert : 1, affect : affect})
         },
         error:(er)=> {
-          this.trig.emit({message : er.message, alert : 2});
+          this.trig.emit({message : er.message, alert : 2, affect : affect});
         }
       });
       console.log(affect.id)
