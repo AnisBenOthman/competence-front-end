@@ -9,10 +9,10 @@
           <a class="container">
             <h5>{{item.libelle}}</h5>
             <button [routerLink]="['/competence',item.id]">Details</button>
+            <button mat-icon-button (click)="delete(item)"><mat-icon>delete </mat-icon></button>
           </a>
+          
         </div>
-      
-      
-      
+        
     </li>
   </ol>

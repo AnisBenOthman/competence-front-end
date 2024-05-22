@@ -35,4 +35,7 @@ return this.http.get<any>(this.urlTeam);
   getCompetences(){
     return this.http.get<string[]>(this.urlApi + "competences")
   }
+  getAffectationbyCompetence(id : number){
+    return this.http.get<Affectation[]>(this.urlApi + "competence/" + id);
+  }
 }

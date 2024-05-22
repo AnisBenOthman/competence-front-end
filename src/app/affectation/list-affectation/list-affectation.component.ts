@@ -12,13 +12,16 @@ import { AlertComponent } from 'src/app/shared/alert/alert/alert.component';
 })
 export class ListAffectationComponent {
 @Input() affectations!:Affectation[];
+@Input() proprety!:string;
+@Input() propretyName!:string;
 message = "";
 alert = 0;
 @Output() trig = new EventEmitter<{message : string, alert : number}>;
-@Output() updateEvent = new EventEmitter<Affectation[]>;
-finalArray : Affectation[] = [];
+@Output() updateEvent = new EventEmitter<Affectation[]>; //send data : list modified to user-detail component
+finalArray : Affectation[] = []; //list which include only affectation who has been changed level
 constructor(private dialogue : MatDialog, private sr : AffectationService) {
-  console.log(this.affectations == undefined)
+  
+  
  }
 delete(affect : Affectation){
 let ref = this.dialogue.open(AlertComponent, { data : { name : affect.competence}})

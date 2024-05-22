@@ -19,4 +19,7 @@ export class CompetenceService {
   addCompetence(body: Competence){
     return this.http.post(this.urlApi, body)
   }
+  deleteCompetence(id : number){
+    return this.http.delete(this.urlApi+'id/' + id)
+  }
 }

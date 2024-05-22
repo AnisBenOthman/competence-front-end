@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UserService } from '../core/services/user.service';
 import { User } from '../user/user.model';
 import { Affectation } from '../core/models/affectation.model';
 import { AffectationService } from '../core/services/affectation.service';
-
+import { RadarComponent } from '../radar/radar.component';
 @Component({
   selector: 'app-radar-team',
   templateUrl: './radar-team.component.html',
@@ -18,10 +18,12 @@ export class RadarTeamComponent {
   labels : string [] = [];
   filtreArray : any[] = [];
   dataSet: any[] = []
+  @ViewChild(RadarComponent) radar !: RadarComponent;
 constructor(private lu : UserService, private as : AffectationService){
 this.getPays();
 // this.filtrePays();
 }
+
 getPays(){
   
   this.lu.filtrePays().subscribe({
@@ -71,6 +73,8 @@ getPays(){
     })
   }}
   console.log(this.dataSet)
+  this.radar.radarChartDatasets = this.dataSet;
+  //this.radar.radarChartLabels = this.labels;
 }
 }
 

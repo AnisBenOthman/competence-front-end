@@ -46,7 +46,7 @@ row: any;
           pays : data.pays
         });
         this.nomUser = data.nom;
-        console.log(this.userForm.value);
+        
         
       },
     error: (err) => alert(err.message) })

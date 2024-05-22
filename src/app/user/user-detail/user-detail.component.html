@@ -5,11 +5,12 @@
   <app-add-affectation (addCompetence)="addAffectation($event)"></app-add-affectation>
   <div *ngIf="affectations.length != 0">
     <hr>
-    <app-list-affectation  [affectations]="affectations" (trig)="declare($event)" (updateEvent)="getDataAffectation($event)" ></app-list-affectation>
+    <app-list-affectation  [affectations]="affectations" [proprety]="'competence'" (trig)="declare($event)" (updateEvent)="getDataAffectation($event)" ></app-list-affectation>
   </div>
   <div *ngIf="affectations.length != 0">
     <hr>
-    <app-radar ></app-radar>
+    <app-radar [radarChartDatasets]="radarDataSet"></app-radar>
+    
   </div>
   
   
