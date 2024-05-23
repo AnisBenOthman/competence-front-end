@@ -26,6 +26,7 @@ export class UserDetailComponent implements OnInit, AfterViewInit {
   constructor(private dataService: UserService, private ar: ActivatedRoute, private affectationService: AffectationService, private cdr : ChangeDetectorRef) {
     this.getUserById();
     this.getAffectationbyUser();
+        
    
   }
   ngOnInit(): void {
@@ -49,8 +50,13 @@ export class UserDetailComponent implements OnInit, AfterViewInit {
     this.affectationService.getAffectationByUser(this.ar.snapshot.params["id"]).subscribe({
       next: (data) => {
         this.affectations=data;
-        console.log(this.affectations)
-        
+        this.affectations.map(o => {
+          this.labels.push(o.competence);
+          this.dataSet.push(Number(o.niveau));
+        this.radarDataSet = [{ data: this.dataSet, label: `Competence ${this.user.nom}`, borderWidth: 1 }];
+        })
+        console.log(this.labels)
+        console.log(this.dataSet)
         },
       error: (e) => {
         this.alert = 2;
@@ -59,29 +65,20 @@ export class UserDetailComponent implements OnInit, AfterViewInit {
     })
   } 
   updateUser(body:User){
-    this.labels = [];
-    this.dataSet = [];
+    
     this.dataService.updateUser(this.ar.snapshot.params["id"], body).subscribe({
       next : (data : any) => { 
         this.alert = 1;
         this.message = body.nom + " " +  body.prenom + " " +data.Message;
         this.updateAffectation(this.arrayUpdate)
-        // this.getAffectationbyUser();
-        // this.affectations.map(o => {
-        //   this.labels.push(o.competence);
-        //   this.dataSet.push(Number(o.niveau));
- // })
         
-
-        console.log(this.labels)
-        console.log(this.dataSet)
       },
       error : (err)=> {
         this.alert = 2;
         this.message = err.message;
       }
     })
-    this.UpdateRadar()
+    //this.UpdateRadar()
     
   }
 
@@ -104,7 +101,17 @@ export class UserDetailComponent implements OnInit, AfterViewInit {
           }else {
             this.alert = 1;
             this.message = `${data.competence} add successfully`
-            console.log(data)
+            this.labels.push(data.competence);
+      this.labels.splice(0,1)
+      
+      this.dataSet.push(Number(data.niveau));
+      this.dataSet.splice(0,1)
+      this.radar.radarChartLabels = this.labels;
+        
+        this.radarDataSet = [{ data: this.dataSet, label: `Competence ${this.user.nom}`, borderWidth: 1 }];
+        this.radar.radarChartDatasets = this.radarDataSet;
+        console.log(this.labels)
+        console.log(this.dataSet)
           } 
           
         },
@@ -113,7 +120,7 @@ export class UserDetailComponent implements OnInit, AfterViewInit {
           this.message = error.message;
         }
       })
-      this.UpdateRadar()
+      
       
     }
 
@@ -122,8 +129,8 @@ export class UserDetailComponent implements OnInit, AfterViewInit {
       this.alert = data.alert
       setTimeout(() => {
         const index = this.labels.indexOf(data.affect.competence)
-        const filtre = this.labels.filter(o => o !== data.affect.competence)
-        this.radar.radarChartLabels = filtre;
+        this.labels.splice(index,1);
+        this.radar.radarChartLabels = this.labels;
         this.dataSet.splice(index,1);
         this.radarDataSet = [{ data: this.dataSet, label: `Competence ${this.user.nom}`, borderWidth: 1 }];
         this.radar.radarChartDatasets = this.radarDataSet;
@@ -137,27 +144,25 @@ export class UserDetailComponent implements OnInit, AfterViewInit {
 
     updateAffectation(data : any){
       if(data.length > 0){
+        let updateCount = 0
         for (let i=0; i < data.length; i++){
           this.affectationService.updateAffectationEmploye(data[i].id,{ niveau : data[i].niveau}).subscribe({
-            next:(d) => console.log(d),
+            next:(d : any) => {
+              
+            const index = this.labels.findIndex( x => x.toLowerCase() == d.employe.competenceId.libelle)
+            this.dataSet[index] = Number(data[i].niveau)
+            this.radarDataSet = [{ data: this.dataSet, label: `Competence ${this.user.nom}`, borderWidth: 1 }];
+           
+          },
             error:(erreur) => alert(erreur.message)
           })
+          
         }
+        
+        
+        
       }
+      
     }
-    UpdateRadar(){
-      setTimeout(() => {
-        this.getAffectationbyUser();
-        this.affectations.map(o => {
-          this.labels.push(o.competence);
-          this.dataSet.push(Number(o.niveau));
-        })
-        this.radar.radarChartLabels = this.labels;
-        this.radarDataSet = [{ data: this.dataSet, label: `Competence ${this.user.nom}`, borderWidth: 1 }];
-        this.radar.radarChartDatasets = this.radarDataSet;
-        console.log(this.labels)
-        console.log(this.dataSet)
-        this.cdr.detectChanges();
-       } ,2000);
-    }
+
 }

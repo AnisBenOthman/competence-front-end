@@ -33,25 +33,26 @@ constructor(private affectationService : AffectationService, private ar: Activat
   getAffectationbyUser(){
     
     this.id = this.ar.snapshot.params["id"];
-    if(this.id){
+    // if(this.id){
       
       
-      this.affectationService.getAffectationByUser(this.ar.snapshot.params["id"]).subscribe({
-        next: (data : any) => {
-          this.affectations=data;
-          this.getUserById();
-          data.map((o : any) => {
+    //   this.affectationService.getAffectationByUser(this.ar.snapshot.params["id"]).subscribe({
+    //     next: (data : any) => {
+    //       this.affectations=data;
+    //       this.getUserById();
+    //       data.map((o : any) => {
             
-          this.competencesName.push(o.competence)
-          this.niveau.push(o.niveau)})
-          //this.radarChartDatasets = [{data : this.niveau, label: `Competence ${this.userName}`, borderWidth : 1} ]
-          this.radarChartLabels = this.competencesName;
+    //       this.competencesName.push(o.competence)
+    //       this.niveau.push(o.niveau)})
+    //       //this.radarChartDatasets = [{data : this.niveau, label: `Competence ${this.userName}`, borderWidth : 1} ]
+    //       this.radarChartLabels = this.competencesName;
           
           
-          },
-        error: (e) => alert(e.message)
-      })
-    } else if (this.id == undefined && this.pays == undefined) {
+    //       },
+    //     error: (e) => alert(e.message)
+    //   })
+    // } else if (this.id == undefined && this.pays == undefined) {
+      if (this.id == undefined && this.pays == undefined) {
       this.affectationService.getCompetenceTeam().subscribe({
         next : (data) => {
           
