@@ -14,4 +14,10 @@
 </div>
 <hr>
 
-<app-radar [pays]="paysSelectionne.value"  #child></app-radar>
+<!-- <app-radar [pays]="paysSelectionne.value" [radarChartDatasets]="dataSet" ></app-radar> -->
+<div class="canvas-container"><canvas baseChart
+  [datasets]="dataSet"
+  [options]="radarChartOptions"
+  [labels]="labels"
+  [type]="'radar'">
+</canvas></div>

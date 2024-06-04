@@ -1,3 +1,5 @@
+<div class="alert alert-success" role="alert" *ngIf="alert == 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="10" height="10"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg> {{message}}</div>
+<div class="alert alert-danger" role="alert" *ngIf="alert == 2">{{message}}</div>
 <div class="row">
     <div class="col-xs-12" >
       <div *ngIf="id == undefined"><p >Add new Competence!</p></div>
@@ -23,6 +25,6 @@
         </div>
         <br>
         <button class="btn btn-primary" *ngIf="id == undefined" [disabled]="libelle.invalid" (click)="addCompetence()">Add Competence</button>
-        <button class="btn btn-primary" *ngIf="id">Modify Competence</button>
+        <button class="btn btn-primary" *ngIf="id" (click)="updateCompetence()">Modify Competence</button>
         </form>
         </div>
