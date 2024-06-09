@@ -1,0 +1,8 @@
+.medium-size {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centre les éléments verticalement */
+    width: 400px; /* Ajustez cette valeur en fonction de la taille souhaitée */
+    height: 400px; /* Ajustez cette valeur en fonction de la taille souhaitée */
+    margin: 0 auto; /* Centre le conteneur horizontalement */
+  }

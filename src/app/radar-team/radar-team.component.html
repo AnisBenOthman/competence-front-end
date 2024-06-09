@@ -15,9 +15,13 @@
 <hr>
 
 <!-- <app-radar [pays]="paysSelectionne.value" [radarChartDatasets]="dataSet" ></app-radar> -->
-<div class="canvas-container"><canvas baseChart
+
+<div class="canvas-container medium-size">
+  <canvas baseChart
   [datasets]="dataSet"
   [options]="radarChartOptions"
   [labels]="labels"
   [type]="'radar'">
-</canvas></div>
+  </canvas>
+</div>
+
